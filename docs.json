@@ -1,71 +1,61 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Tekbot Internship Docs",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#25346e",
+    "light": "#25346e",
+    "dark": "#25346e"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "navigation": {
-    "tabs": [
+    "groups":[
       {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
-            ]
-          }
+        "group": "Overview",
+        "pages": [
+          "overview/introduction"
         ]
       },
       {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "API Documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint Examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
-            ]
-          }
+      "group": "Internship Log",
+        "pages": [
+          "internship-log/week-1",
+          "internship-log/week-2"
+        ]
+      },
+      {
+        "group": "Rover Project",
+        "pages": [
+          "rover-project-electronic/architecture",
+          "rover-project-electronic/circuit-audit-v1"
+        ]
+      },
+      {
+        "group": "Analog Robots",
+        "pages": [
+          "/analog-electronics/ligth-tracker-robot",
+          "/analog-electronics/mustache-robot"
+        ]
+      },
+      {
+        "group": "Skills",
+        "pages": [
+          "skills/kicad"
         ]
       }
+
     ],
     "global": {
       "anchors": [
         {
           "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
+          "href": "https://tekbot-robotics-internship.mintlify.app/",
           "icon": "book-open-cover"
         },
         {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
+          "anchor": "Github",
+          "href": "https://github.com/peniel-09/tekbot-internship-docs",
+          "icon": "github"
         },
         {
           "anchor": "Blog",
@@ -76,8 +66,8 @@
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/Tek6.png",
+    "dark": "/logo/Tek6.svg"
   },
   "navbar": {
     "links": [
@@ -94,9 +84,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com/peniel-09/tekbot-internship-docs",
+      "linkedin": "https://www.linkedin.com/in/p%C3%A9niel-ahouansou-43b1482a1?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
     }
   }
 }
