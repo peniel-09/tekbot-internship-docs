@@ -10,17 +10,10 @@
   "favicon": "/favicon.png",
   "navigation": {
     "groups":[
-      {
+      {  
         "group": "Overview",
         "pages": [
           "overview/introduction"
-        ]
-      },
-      {
-      "group": "Internship Log",
-        "pages": [
-          "internship-log/week-1",
-          "internship-log/week-2"
         ]
       },
       {
@@ -30,17 +23,31 @@
           "rover-project-electronic/circuit-audit-v1"
         ]
       },
+    
       {
         "group": "Analog Robots",
         "pages": [
-          "/analog-electronics/ligth-tracker-robot",
-          "/analog-electronics/mustache-robot"
+          "/analog-electronics/light-tracker-robot"
+        ]
+      },
+      {
+        "group": "Robotic Workshops",
+        "pages": [
+          "robotic workshops/introduction_to_robotics_and_electronics",
+          "robotic workshops/drone_piloting_workshop"
+        ]
+      },
+      {
+        "group": "Garby Robot",
+        "pages": [
+          "/automatic-trash-collector-aka-garby/garbage collector robot",
+          "/automatic-trash-collector-aka-garby/what's-next"
         ]
       },
       {
         "group": "Skills",
         "pages": [
-          "skills/kicad"
+          "skills/summary"
         ]
       }
 

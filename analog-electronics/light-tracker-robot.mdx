@@ -1,0 +1,61 @@
+---
+title: Light Tracker Robot
+---
+## Strengthen electronic fundamentals
+My internship also includes a project to build an analog light tracker robot from scratch, without using a microcontroller.
+The objective of this project is to steer a small 3-wheeled car using light.
+This robot uses two photoresistors to detect the light intensity on each side. 
+The light intensity caught by each photoresistor is converted into a voltage signal, which is then processed by an operational amplifier configured as a comparator. 
+This voltage signal is compared to a reference voltage set by a potentiometer, allowing the robot to determine which direction to turn based on the light intensity of each side.
+
+### Components used
+- 2 Photoresistors (LDR)
+- 1 Potentiometer
+- 1 LM324 Operational Amplifier
+- 2 DC motors
+- 1 3-wheeled chassis
+- 1 Battery pack (4xAA)
+- Various resistors and capacitors
+- Breadboard and jumper wires
+- 1 Switch
+- 2 Diodes (1N4007)
+- 2 Transistors (2N2222)
+- 2 Light Emitting Diodes (LEDs)
+ 
+### Electronic schematic
+<img
+  className="block dark:hidden"
+  src="/images/tracker.jpg"
+  style={{ width: '800px', height: '500px', borderRadius: '30px' }}
+  alt="Hero Light"
+/>
+<img
+  className="hidden dark:block"
+  src="/images/tracker.jpg"
+  style={{ width: '800px', height: '500px', borderRadius: '30px' }}
+  alt="Hero Dark"
+/>
+### Working prototype
+<img
+  className="block dark:hidden"
+  src="/images/trackerf.jpg"
+  style={{ margin: '0 auto', display: 'block', width: '344px', height: '500px', borderRadius: '30px' }}
+  alt="Hero Light"
+/>
+
+### Version with PCB
+After successfully building and testing the breadboard prototype, I made a custom PCB to enhance the robot's reliability and compactness using KiCad, FlatCAM and Candle softwares with a CNC milling machine.
+I learned how to design a PCB layout, generate G-code, and use the CNC machine to mill the PCB.
+<img
+  className="hidden dark:block"
+  src="/images/pcb1.jpg"
+  style={{ margin: '0 auto', display: 'block', width: '500px', height: '400px', borderRadius: '30px' }}
+  alt="Hero Light"
+/>
+### 
+<img
+  className="hidden dark:block"
+  src="/images/pcb2.jpg"
+  style={{ margin: '0 auto', display: 'block', width: '500px', height: '400px', borderRadius: '30px' }}
+  alt="Hero Light"
+/>

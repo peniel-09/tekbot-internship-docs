@@ -1,0 +1,35 @@
+---
+title: Redesign and Improve
+---
+## Circuit audit and alternative proposal
+My mission was to propose an alternative to existing drivers, suitable for modern motors. Initially, I explored a solution using TIP120 and TIP127 Darlington transistors. This solution was simple to implement and allowed for high current amplification, but it had a significant voltage drop and significant heat dissipation, limiting its efficiency.
+
+I therefore simulated a second solution based on P-Channel and N-Channel MOSFETs. This approach allows for fast switching and low power loss, improving the efficiency and precision of motor control, while requiring slightly more complex control. This evolution illustrates my choice to optimize performance while adapting the design to current energy management needs.
+### First alternative: H-bridge with Darlington transistors
+
+<img
+  className="block dark:hidden"
+  src="/images/ponth (1).png"
+  alt="Hero Light"
+/>
+<img
+  className="hidden dark:block"
+  src="/images/ponth (1).png"
+  style={{ width: '800px', height: '500px', borderRadius: '30px' }}
+  alt="Hero Dark"
+/>
+
+#### Second alternative: H-bridge with MOSFETs
+<img
+  className="block dark:hidden"
+  src="/images/mosfet.png"
+  alt="Hero Light"
+/>
+<img
+  className="hidden dark:block"
+  src="/images/mosfet.png"
+  style={{ width: '800px', height: '500px', borderRadius: '30px' }}
+  alt="Hero Dark"
+/>
+### Conclusion
+This project allowed me to deepen my understanding of motor control circuits and to explore different electronic components.
