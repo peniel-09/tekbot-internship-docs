@@ -38,16 +38,16 @@
         ]
       },
       {
-        "group": "Garby Robot",
+        "group": "Automatic Trash Collector (aka Garby)",
         "pages": [
           "/automatic-trash-collector-aka-garby/garbage collector robot",
           "/automatic-trash-collector-aka-garby/what's-next"
         ]
       },
       {
-        "group": "Skills",
+        "group": "Summary",
         "pages": [
-          "skills/summary"
+          "Summary/summary"
         ]
       }
 

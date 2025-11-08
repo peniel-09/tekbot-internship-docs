@@ -1,0 +1,26 @@
+---
+ title: What's Next (Development Roadmap)
+---
+The project is currently in the advanced design and early prototyping phase. The immediate next steps are focused on integration and validation:
+
+1. **Testing & Calibration of Individual Components:**
+    * **Camera & Vision Pipeline:** Set up the Raspberry Pi Camera and run initial tests with the FOMO model to ensure reliable trash detection.
+    * **IMU Calibration:** Calibrate the MPU6050 to provide accurate orientation data to the Raspberry Pi.
+    * **Mecanum Drive Control:** Implement and test basic movement commands (forward, backward, strafe, rotate) on the Mbot chassis.
+
+2.  **Component Benchmarking (Critical):**
+    * **AI Performance:** What is the *maximum* stable FPS we can achieve for the FOMO detection model on the Pi Zero? This number will define the limits of the entire system.
+    * **Sensor Fusion:** Establish reliable, high-speed data streams from the Camera and the MPU6050, ensuring their data can be synchronized.
+
+3.  **Software Simulation:**
+    * **Kalman Filter:** Develop and test the Kalman filter in a simulated environment (e.g., Python) with "fake" noisy 2D data to prove the mathematics before porting to the Pi.
+    * **Mecanum Kinematics:** Validate the inverse kinematics model for the Mbot chassis.
+
+4.  **Physical Integration:**
+    * **Mechanical:** Finalize and 3D print the camera/IMU mounts and attach them to the Mbot chassis.
+    * **Electronics:** Wire the Pi Zero to the Mbot's motor driver board and the IMU.
+
+5.  **Full Loop Testing (Iterative):**
+    * **Phase 1 (Movement):** Test navigation stack. Can the robot precisely move to a *static* `(X, Y)` coordinate?
+    * **Phase 2 (Tracking):** Test the vision pipeline. Can the robot "follow" a slowly moved object (without throwing it)?
+    * **Phase 3 (Interception):** Begin controlled throw tests, tuning the Kalman filter's noise parameters (Q and R) and the motor controller's PID values until the interception is reliable.

@@ -1,14 +1,129 @@
 ---
-title: Automatic Trash Collector aka Garby
+title: 'Automatic trash collector Project: Design Strategy (In Progress)'
 ---
-The final project I worked on during my internship at TEKBOT ROBOTICS was the development of an Automatic Trash Collector, affectionately named "Garby".
+The final project I worked on during my internship at TEKBOT ROBOTICS was the development of an Automatic Trash Collector, affectionately named “Garby”.  This page covers the mechanical design and the electronic/software architecture currently being prototyped.
 
-### Concept and goal
-This project aims to design a mobile robot capable of detecting and intercepting waste thrown in motion using lightweight embedded AI (FOMO) and an omnidirectional mecanum chassis.
-Here is a sketch of the initial design:
+## 🎯 Project Goal
+
+The "Garby" project aims to design and prototype an autonomous mobile robot capable of intercepting thrown waste. To achieve this, the robot must:
+1.  Detect a moving piece of trash (via camera).
+2.  **Track** the trash and predict its 3D trajectory and landing spot **in real-time**.
+3.  **Continuously navigate** towards the *updated* landing spot to intercept it.
+
+This documentation presents the **current design status** and the technological choices being considered for prototyping. The project is actively under development.
+
 <img
-  src="/images/garby.png"
-  alt="Garby"
-  style={{  margin: '0 auto', display: 'block', borderRadius: '20px', width: '450px', height: '550px' }}
+  src="/images/garby.png"
+  alt="Garby"
+  style={{  margin: '0 auto', display: 'block', borderRadius: '20px', width: '450px', height: '550px' }}
 />
- 
+
+## ⚙️ Pole 1: Mechanical Design (Prototyping)
+
+The current mechanical approach prioritizes simplicity, efficiency, and rapid prototyping.
+
+### Chassis and Mobility
+To ensure maximum responsiveness, the chassis is designed around **4 mecanum wheels**. This strategic choice allows the robot to move omnidirectionally (lateral, diagonal translations) without needing to pivot first.
+
+
+<img
+  src="/images/mecanum.jpg"
+  alt="Concept of Mecanum wheels and associated motors"
+  style={{  margin: '0 auto', display: 'block', borderRadius: '20px', width: '450px', height: '550px' }}
+/>
+
+### Collection System
+To maximize interception chances, the top of the robot will be a large, funnel-shaped receptacle, guiding the waste toward the center.
+
+### Fabrication
+The custom parts, such as camera are designed to be **3D printed in PLA**. We decided to use the **4-wheel Mecanum chassis** of an **Mbot robot** already available at SCOP.
+
+<img
+  src="/images/mbot.jpg"
+  alt="Exploded view of Garby's mechanical concept"
+  style={{  margin: '0 auto', display: 'block', borderRadius: '20px', width: '550px', height: '400px' }}
+/>
+
+---
+
+## 👩🏽‍🔧 Pole 2: Electronics & Software
+
+The software and electronic architecture is the core of the project. It is designed in several functional blocks, aiming to move from 2D vision to reliable 3D prediction.
+
+### Block 1: Perception and Reactive Prediction
+
+This critical block is centered on the **Raspberry Pi Zero**, which handles the entire high-frequency processing loop.
+
+* **Components (Planned):**
+
+    * 1x **Raspberry Pi Camera version 1.3**: Captures video frames for trash detection.
+
+    * 1x **Raspberry Pi Zéro** module: Manages image acquisition, AI model execution, and trajectory calculations.
+
+    * 1x **IMU module (MPU6050)**: Essential for knowing the camera's exact orientation in real-time.
+
+<CardGroup cols={3}>
+
+  <Card title="Raspberry Pi Camera version 1.3" icon="camera">
+
+    <img src="/images/cam.png" alt="camera " />
+
+    Quantity: 01
+
+   
+
+    Available at SCOP
+
+  </Card>
+
+  <Card title="Raspberry Pi 0" icon="microchip">
+
+    <img src="/images/pi zero.jpeg" alt="Raspberry Pi 0" />
+
+    Quantity: 01
+
+   
+
+    Available at SCOP
+
+  </Card>
+
+  <Card title="IMU module (MPU6050)" icon="microchip">
+
+    <img src="/images/imu.png" alt="IMU" />
+
+    Quantity: 06
+
+   
+
+    [Buy on YoupiLab](https://youpilab.com)
+
+  </Card>
+
+</CardGroup>
+
+
+* **Reactive Processing Loop (In Development):**
+    This is not a sequential process, but a high-frequency parallel loop running on the **Pi Zero**.
+
+    1.  **Detect (Vision):** The Pi Zero captures a frame from the camera, runs the TinyML (FOMO) model to get the trash's `(u, v)` pixel coordinates.
+    2.  **Sense (IMU):** Simultaneously, it reads the current orientation (roll, pitch, yaw) from the MPU6050.
+    3.  **Update (Kalman Filter):** The new `(u, v)` coordinates and IMU data are fed into the **Kalman Filter** as a "measurement." The filter uses this to correct its internal state.
+    4.  **Extrapolate (Physics):** The filter's *newly corrected* state (position `(x, y, z)` and velocity `(vx, vy, vz)`) is immediately used to re-calculate the final landing spot: `(X_target, Y_target)`.
+    5.  **Navigate (Action):** This new `(X_target, Y_target)` is immediately passed to the Navigation block (Block 2), which updates the robot's movement.
+
+<Note title="Major Technical Challenge: Pi Zero Performance">
+  The **Raspberry Pi Zero** (especially version 1) is a single-core, low-power board.
+  Running this entire loop—which includes video capture, AI inference, IMU data fusion, Kalman filtering, and inverse kinematics—at a high-enough frequency (e.g., 20-30 Hz) to intercept a fast-moving object is **extremely ambitious**.
+  
+  Success will depend heavily on intense code optimization, possibly using C++/multithreading, and confirming that the FOMO model is small and fast enough. Performance benchmarking is the most critical first step.
+</Note>
+
+### Block 2 & 3: Real-time Navigation & Actuators
+
+This block no longer "waits" for a final calculation. It runs continuously, receiving a constant stream of updated targets.
+
+1.  **Dynamic Navigation:** The navigation unit (also the **Pi Zero**) receives a *stream* of `(X_target, Y_target)` coordinates from Block 1.
+2.  **Path Re-planning:** Instead of a single path, the "Go-to-Goal" algorithm constantly re-plans its path to the *newest* target coordinate, ensuring the robot is always moving toward the best-known prediction.
+3.  **Motor Control:** The Pi Zero continuously calculates the inverse kinematics for the mecanum wheels and sends updated PWM commands to the mbot chassis's motor drivers.
+4.  **Actuators:** The mbot chassis executes these low-level commands.
